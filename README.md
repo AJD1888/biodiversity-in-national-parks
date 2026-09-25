@@ -17,11 +17,7 @@ The main goal of the project is to investigate wheather there are patterns betwe
 
 ## Research Questions 
 
-1. What is the distribtution of conservation status across the species ? 
-2. Are certain species categories more likey to have a conservation status ? 
-3. Is there a statistically significant realtionship between species category and conservation status ? 
-4. Which species are observed most frequently across the national parks ? 
-5. How do species obvservations differ between the national parks ? 
+1. What is the distribtution of conservation status over different animals ? 
 
 ## Data 
 
@@ -52,3 +48,11 @@ The analysis will follow the process:
 6. Create visualisations 
 7. Interpret the findings 
 8. Summarise conclusions and limitations. 
+
+
+## Analysis report
+
+### Clean and prepare the data
+
+Initially, the two csv files, 'species_info.csv' and 'observations.csv' were loaded into two data frames, 'species_info_df' and 
+'observations_df' respectively for inspection. Upon exploring the data it was found that the observations dataframe had 15 duplicate values and the species info dataframe had 5633 missing values in the conservation status column. To deal with the duplicate data in the observations dataframe, the drop_duplicates() function was used. Following on from this, the NaN values in the conservation status were filled with the value 'No concern' using the .fillna() function. This was done because having this many species without a conservation status having no values could skew later analysis on the biodiversity in the parks as analytical functions may exclude these rows as a result of the missing values. Moreover, the missingness in the column is structured, suggesting that none of the other values for other rows in this column apply to these species, which leaves only one option and that is for them not to be endangered.  
