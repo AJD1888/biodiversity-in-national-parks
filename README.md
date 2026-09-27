@@ -64,11 +64,28 @@ Looking at the observations data frame, firstly the sum of all observations and 
 
 Both data frames were then merged to look at the most dominant category of animal per park. The dataframe was goruped by park name and category, and fron there the obervations were summed. This allowed us to get the maximum observation in each park. This analysis concluded that across all parks the 'Vascular Plant' was the most popular category of species observed. 
 
+Finally, we then honed in on the species that were endangered, to get an idea of how this varied by park. The bar chart showed that Yellowstone National Park had by far the highest count of observations of species that were endangered, with over 1400 observations. This accounts for 44.3% of the overall contribution to all endangered species, with the next closest park being Yosemite National Park, which contributed to 26.8% of all endagered species. 
+
 ### Statistical Analysis
 
 Following on from EDA, statistical analysis was then performed to find out if there is any association between the category of animal and coservation status. The contingency table from earlier was taken and put into the chi2_contingency() function, giving us a value for the chi-sqaure statistic and the expected contingency tabke. Initally, the expected contigency table produced very large numbers so this was converted to a data frame for easier inspection. A chi-square value of 469.5 was returned, revealing a statistically significant relationship between species cateogry and protection status. 
 
 Comparing actual counts against expected values demonstrates that Mammals (38 observed vs 7.02 expected) and Birds (79 observed vs 17.09 expected) are protected at substantially higher rates than expected. Conversley, Vascular Plants are protected at a significantly lower rate than expected (46 observed vs 146.60 expected)
+
+## Conclusions
+
+This project analysed biodiversity and conservation patterns across national parks focusing on the relationship between species categories and protection status. 
+
+### Key Findings 
+
+The protection status of animals was disproportionstely weighted towards specific groups. Mammals and birds had a significantly higher protection rate relative to their overall species count in the dataset. Conversely, Vascular Plants show a much lower protection rate despite being the highest represented species in the dataset. 
+
+The statistical independence test using the chi-square statistic confirmed a statistically significant relationship between category and protection status. This indicates that a species risk or protection tierr is strongly associated with its category rather than being randomly distributed. 
+
+While Vascular Plants consistently generate the highest volume of total observations across all national parks due to sheer species count, park-level tracking highlights clear differences in where endangered wildlife sightings are concentrated. Visualising total counts and percentage contributions of endangered species per park reveals key hotspots for vulnerable wildlife.
+
+
+
 
 
 
