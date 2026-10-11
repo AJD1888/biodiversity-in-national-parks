@@ -1,88 +1,111 @@
-# Biodveristy in national parks project 
+# Biodiversity in National Parks
 
-## Project Overview
+## 1. Project Overview
 
-The main goal of the project is to investigate wheather there are patterns between speicies type and conservation status, while also exploring how species observations vary between national parks 
+This project investigates patterns in conservation status across species categories and explores differences in recorded species observations across national parks
 
-## Objectives 
+Using python, the project applies data cleaning, exploratory data analysis, data visulaisation and statisitcal analysis to investigate biodiversity-related patterns in the supplied datasets.
 
-- Explore the sepcies and obvervations data sets.
-- Clean both datasets so they are ready to be analysed.
-- Investigate the distribution of conservation statuses.
-- Compare conservation statuses accross different species categories.
-- Investigate wheather species category and conservation status are realated. 
-- Analyse species observations across different national parks.
-- Create visualisations to communicate key findings. 
-- Summarise findings and identify limitations in the data.
+## 2. Research Questions 
 
-## Data 
+The analysis aims to answer to following questions: 
 
-The project uses two datasets: 
+- How does recorded conservation status vary across species categories ? 
+- Is there an assocition between species category and recorded conservation status ? 
+- How do recorded species observations vary across national parks ? 
+- Which species categories account for the highest observation counts in each park ? 
 
-- 'species_info.csv'
-- 'observations.csv'
+## 3. Datasets 
 
-## Tools 
+The project uses two CSV datasets: 
 
-- Python
+- species_info.csv: contains species information, including scientifc names, common names, species categories and conservation status.
+- obervations.csv - contains recorded species observations counts across national parks. 
+
+## 4. Tools and Technologies
+
+- Python 
 - Pandas 
-- NumPy 
-- Matplotlib 
 - Seaborn 
+- Matplotlib
+- SciPy
 - Jupyter Notebook 
-- Github 
+- Github
 
-## Methodology 
+## 5. Project Methodology 
 
-The analysis will follow the process: 
+The project follows these stages: 
+    
+    1. Load and inspect the data.
+    2. Investigate missing values and duplicate records.
+    3. Clean and prepare the data.
+    4. Conduct exploratory data analysis. 
+    5. Create visualisations to communicate findings. 
+    6. Apply statstical tests where appropriate. 
+    7. Interpret the results and identify limitations. 
+    8. Summarise the key findings and conclusions.
 
-1. Load the datasets
-2. Expolore and understand the data 
-3. Clean and prepare the data 
-4. Perform exploratory analysis 
-5. Conduct statsitcal analysis where appropriate 
-6. Create visualisations 
-7. Interpret the findings 
-8. Summarise conclusions and limitations. 
+## 6. Data Cleaning and Preparation
+
+### Missing Values 
+
+The conservation_status column in species_info.csv contains 5,633 missing values out of 5,824 records, representing approximately 96.7% of the dataset. 
+
+Missing values have been investigated by species category and visualised using a bar chart of the percentage missing within each category. 
+
+The missing values have been preserved during the initial investigation rather than automatically replacing them with a conservation status label. Their treatment will be determined according to the requirements of the subsequent analysis. 
+
+### Duplicate Records
+
+An initial duplicate check is identified: 
+
+- species_info.csv: 0 duplicate rows.
+- observations.csv: 15 duplicate rows. 
+
+The 15 exact duplicate rows were removed from the observations dataset using pandas drop_duplicates() method. The dataset was then checked again to verify that no exact duplicate rows remained. 
+
+## 7. Exploratory Data Analysis 
+
+### Initial Dataset Inspection
+
+The species dataset contains 5,824 rows and four columns, while the observations dataset contains 23,281 rows and three columns following duplicate removal.
+
+The species dataset has missing values only in the `conservation_status` column. The observations dataset contains no missing values in its three columns. The `observations` column is stored as an integer, allowing numerical analysis of recorded observation counts.
+
+Both datasets have the expected basic structure for further exploratory analysis. The uniqueness of species identifiers and the relationship between the datasets will be checked before merging.
+
+### Distribution of Species Categories
+
+Vascular plants account for 76.75% of the 5,824 species records, making them the dominant category in the dataset. Birds represent the second-largest category at 8.95%, while all remaining categories individually account for less than 6%.
+
+This uneven distribution is important when interpreting subsequent analyses, as overall results may be strongly influenced by the high representation of vascular plants. Species counts and observation counts will therefore be examined separately.
 
 
-## Analysis report
+### Distribution of Recorded Conservation Status
 
-### Clean and prepare the data
+Of the 191 species with a recorded conservation status, 161 (84.29%) are classified as Species of Concern. A further 16 are Endangered, 10 are Threatened and four are In Recovery.
 
-Initially, the two csv files, 'species_info.csv' and 'observations.csv' were loaded into two data frames, 'species_info_df' and 
-'observations_df' respectively for inspection. Upon exploring the data it was found that the observations dataframe had 15 duplicate values and the species info dataframe had 5633 missing values in the conservation status column. To deal with the duplicate data in the observations dataframe, the drop_duplicates() function was used. Following on from this, the NaN values in the conservation status were filled with the value 'No concern' using the .fillna() function. This was done because having this many species without a conservation status having no values could skew later analysis on the biodiversity in the parks as analytical functions may exclude these rows as a result of the missing values. Moreover, the missingness in the column is structured, suggesting that none of the other values for other rows in this column apply to these species, which leaves only one option and that is for them not to be endangered.  
+The distribution is heavily concentrated in the Species of Concern category. However, these results describe only species with a recorded conservation status and should not be generalised to all species in the dataset, given the high proportion of missing values.
+
+### Conservation Status by Species Category
+
+The distribution of recorded conservation statuses varies across species categories. Fish and amphibians have relatively high proportions of records classified as Endangered or Threatened, while the recorded statuses for nonvascular plants and reptiles fall entirely within the Species of Concern category.
+
+However, the percentages are calculated only from species with a recorded conservation status. The number of recorded statuses also varies between categories, so these results should be interpreted cautiously and do not establish the conservation risk of every species within a category.
+
+### Distribution of Observations Across National Parks
+
+Yellowstone National Park accounts for 43.54% of all recorded observations, followed by Yosemite National Park at 26.05%. Bryce National Park contributes 17.39%, while Great Smoky Mountains National Park accounts for 13.02%.
+
+Together, Yellowstone and Yosemite account for approximately 69.59% of recorded observations. These differences describe the distribution of observation counts in the dataset and should not be interpreted as direct measures of wildlife abundance or biodiversity.
+
+## 8. Statistical Analysis
+
+## 9. Key Findings 
+
+## 10. Limitations 
 
 
-### Exploratory Data Analysis 
-
-To start exploring our data, wanted to look at the distribution of conservation status over different types of animal. A contiengency table of the category and conservation_status columns was created and converted to percentages for use in a bar chart. A stacked bar chart was them plotted to show how the different conservation status varied for each category of animal. However, this did not paint a clear picture so the conversation status column had to be simplified. A new column 'is_protected' was creating, storing FALSE for rows that contained 'No concern' in the conservation status column and TRUE otherwise. 
-
-From here, the same process of creating a contingency table was then followed but this time for the category and is_protected columns. Another stacked bar chart was plotted, this time showing the split of animals that were protected and not prodtected as a percentage for each category. 
-
-Looking at the observations data frame, firstly the sum of all observations and mean observations were calculated. The observations per park was then caculated and converted into percentages, allowing us to visualise a pie chart showing the percentage of observations that occured overall in each park. From this, we can see taht the majority of obervations ocurred at yellowstone national park (43.5%), with the next closest percentage of total observations being at Yosemite National Park (26.0%).
-
-Both data frames were then merged to look at the most dominant category of animal per park. The dataframe was goruped by park name and category, and fron there the obervations were summed. This allowed us to get the maximum observation in each park. This analysis concluded that across all parks the 'Vascular Plant' was the most popular category of species observed. 
-
-Finally, we then honed in on the species that were endangered, to get an idea of how this varied by park. The bar chart showed that Yellowstone National Park had by far the highest count of observations of species that were endangered, with over 1400 observations. This accounts for 44.3% of the overall contribution to all endangered species, with the next closest park being Yosemite National Park, which contributed to 26.8% of all endagered species. 
-
-### Statistical Analysis
-
-Following on from EDA, statistical analysis was then performed to find out if there is any association between the category of animal and coservation status. The contingency table from earlier was taken and put into the chi2_contingency() function, giving us a value for the chi-sqaure statistic and the expected contingency tabke. Initally, the expected contigency table produced very large numbers so this was converted to a data frame for easier inspection. A chi-square value of 469.5 was returned, revealing a statistically significant relationship between species cateogry and protection status. 
-
-Comparing actual counts against expected values demonstrates that Mammals (38 observed vs 7.02 expected) and Birds (79 observed vs 17.09 expected) are protected at substantially higher rates than expected. Conversley, Vascular Plants are protected at a significantly lower rate than expected (46 observed vs 146.60 expected)
-
-## Conclusions
-
-This project analysed biodiversity and conservation patterns across national parks focusing on the relationship between species categories and protection status. 
-
-### Key Findings 
-
-The protection status of animals was disproportionstely weighted towards specific groups. Mammals and birds had a significantly higher protection rate relative to their overall species count in the dataset. Conversely, Vascular Plants show a much lower protection rate despite being the highest represented species in the dataset. 
-
-The statistical independence test using the chi-square statistic confirmed a statistically significant relationship between category and protection status. This indicates that a species risk or protection tierr is strongly associated with its category rather than being randomly distributed. 
-
-While Vascular Plants consistently generate the highest volume of total observations across all national parks due to sheer species count, park-level tracking highlights clear differences in where endangered wildlife sightings are concentrated. Visualising total counts and percentage contributions of endangered species per park reveals key hotspots for vulnerable wildlife.
 
 
 
